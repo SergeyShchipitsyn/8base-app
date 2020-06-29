@@ -1,0 +1,9 @@
+.th,
+.td {
+  padding: 10px;
+}
+
+.td:first-child {
+  cursor: pointer;
+  color: blue;
+}

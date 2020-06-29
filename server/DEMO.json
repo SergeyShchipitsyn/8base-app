@@ -1,0 +1,95 @@
+{
+  "tables": [{
+      "name": "Products",
+      "displayName": "Products",
+      "isSystem": false,
+      "fields": [
+        {
+          "name": "price",
+          "displayName": "Price",
+          "description": null,
+          "fieldType": "NUMBER",
+          "fieldTypeAttributes": {
+            "format": "NUMBER",
+            "precision": 0,
+            "currency": null,
+            "minValue": 0,
+            "maxValue": null
+          },
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "defaultValue": null,
+          "relation": null
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "description": null,
+          "fieldType": "TEXT",
+          "fieldTypeAttributes": {
+            "format": "UNFORMATTED",
+            "fieldSize": 500
+          },
+          "isList": false,
+          "isRequired": true,
+          "isUnique": false,
+          "defaultValue": null,
+          "relation": null
+        },
+        {
+          "name": "description",
+          "displayName": "Description",
+          "description": null,
+          "fieldType": "TEXT",
+          "fieldTypeAttributes": {
+            "format": "UNFORMATTED",
+            "fieldSize": 500
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "relation": null
+        },
+        {
+          "name": "avaliableAmount",
+          "displayName": "Avaliable Amount",
+          "description": null,
+          "fieldType": "NUMBER",
+          "fieldTypeAttributes": {
+            "format": "NUMBER",
+            "precision": 0,
+            "currency": null,
+            "minValue": 0,
+            "maxValue": null
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "relation": null
+        },
+        {
+          "name": "bestBefore",
+          "displayName": "Best Before",
+          "description": null,
+          "fieldType": "DATE",
+          "fieldTypeAttributes": {
+            "format": "DATE",
+            "precision": 0,
+            "currency": null,
+            "minValue": 0,
+            "maxValue": null
+          },
+          "isList": false,
+          "isRequired": false,
+          "isUnique": false,
+          "defaultValue": null,
+          "relation": null
+        }
+      ]
+    }
+  ],
+  "version": "0.0.44"
+}
