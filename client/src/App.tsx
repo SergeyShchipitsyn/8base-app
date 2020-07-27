@@ -12,12 +12,12 @@ import { AppRoutes } from './constants/appRoutes';
 
 const { REACT_APP_8BASE_API_ENDPOINT } = process.env;
 
-const AUTH0_CLIENT_ID = 'qGHZVu5CxY5klivm28OPLjopvsYp0baD';
-const AUTH0_CLIENT_DOMAIN = 'auth.8base.com';
+const AUTH0_CLIENT_ID = 'nviTG1mAGCWUKMbu2ek0XCwh2i1ZZZZT';
+const AUTH0_CLIENT_DOMAIN = 'secure.8base.com';
 
 
 const authClient = Auth.createClient({
-  strategy: AUTH_STRATEGIES.WEB_AUTH0,
+  strategy: AUTH_STRATEGIES.WEB_8BASE,
   subscribable: true,
 }, {
   clientId: AUTH0_CLIENT_ID,
@@ -29,14 +29,18 @@ const authClient = Auth.createClient({
 function App() {
   return (
     <AppProvider
-      uri={REACT_APP_8BASE_API_ENDPOINT || 'https://api.8base.com/ckbwbopka000207lc1df40fl9'}
+      uri={REACT_APP_8BASE_API_ENDPOINT || 'https://api.8base.com/ckd4gszxh000207md85nl6woq'}
       authClient={authClient}
       onRequestSuccess={() => {}}
       onRequestError={() => {}}
     >
       {({ loading }) => {
         if (loading) {
-          return <p>Please wait...</p>
+          return (
+            <Container>
+              <p>Please wait...</p>
+            </Container>
+          )
         }
 
         return (
