@@ -1,5 +1,5 @@
-import React from 'react';
-import { useTable, Column, Cell, usePagination } from 'react-table';
+import React, { useEffect } from 'react';
+import { useTable, Column, Cell, usePagination, useBlockLayout } from 'react-table';
 
 import styles from './Table.module.css';
 import { Pagination } from './pagination';
@@ -10,14 +10,21 @@ type TableProps<K extends keyof T = any, T = any> = {
   columns: Column[],
   data: T[]
   loading?: boolean
+  fetchData: ({ pageIndex, pageSize }: FetchData) => void
   onCellClick?: (cellValue: K) => void
 };
+
+export type FetchData = {
+  pageIndex: number
+  pageSize: number
+}
 
 // Simple table from react-table, nothing to see here...
 const Table: React.FC<TableProps> = (
   {
     columns,
     data,
+    fetchData,
     onCellClick = () => {}
   }
 ) => {
@@ -43,10 +50,15 @@ const Table: React.FC<TableProps> = (
      data,
      initialState: { pageSize: INITIAL_PAGE_SIZE }
     },
+    useBlockLayout,
     usePagination
   )
   const totalCount = data.length
   const shownOnCurrentPage = rows.length
+
+  useEffect(() => {
+    fetchData({ pageIndex, pageSize })
+  }, [pageIndex, pageSize, fetchData])
 
   function handleIdCellClick(cell: Cell): void {
     if (cell.column.id === 'id') {
@@ -55,38 +67,38 @@ const Table: React.FC<TableProps> = (
   }
 
   return (
-    <table {...getTableProps()}>
+    <div {...getTableProps()}>
 
-      <thead>
+      <div>
         {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <div {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()} className={styles.th}>{column.render('Header')}</th>
+              <div {...column.getHeaderProps()} className={styles.th}>{column.render('Header')}</div>
             ))}
-          </tr>
+          </div>
         ))}
-      </thead>
+      </div>
 
-      <tbody {...getTableBodyProps()}>
+      <div {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row)
           return (
-            <tr {...row.getRowProps()}>
+            <div {...row.getRowProps()}>
               {row.cells.map(cell => {
                 return (
-                  <td
+                  <div
                     {...cell.getCellProps()}
                     onClick={() => handleIdCellClick(cell)}
                     className={styles.td}
                   >
                     {cell.render('Cell')}
-                  </td>
+                  </div>
                 )
               })}
-            </tr>
+            </div>
           )
         })}
-      </tbody>
+      </div>
 
       <Pagination
         pageIndex={pageIndex}
@@ -101,7 +113,7 @@ const Table: React.FC<TableProps> = (
         nextPage={nextPage}
         setPageSize={setPageSize}
       />
-    </table>
+    </div>
   )
 };
 

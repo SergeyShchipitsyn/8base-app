@@ -1,6 +1,8 @@
 .th,
 .td {
   padding: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .td:first-child {

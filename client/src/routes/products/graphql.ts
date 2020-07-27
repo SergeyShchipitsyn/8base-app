@@ -2,8 +2,8 @@ import gql from 'graphql-tag';
 
 
 export const PRODUCTS_LIST_QUERY = gql`
-  query ProductsList {
-    productsList {
+  query ProductsList($first: Int, $skip: Int) {
+    productsList(first: $first, skip: $skip) {
       items {
         id
         name
