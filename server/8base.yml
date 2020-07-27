@@ -14,8 +14,8 @@ functions:
       code: src/webhooks/webhook/handler.ts
     path: /webhook
     method: POST
-  trigger:
-    type: trigger.before
+  banIllegalProduct:
+    type: trigger.after
     handler:
-      code: src/triggers/trigger/handler.ts
-    operation: Users.create
+      code: src/triggers/banIllegalProduct/handler.ts
+    operation: Products.create

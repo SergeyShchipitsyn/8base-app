@@ -1,6 +1,6 @@
 {
   "data": {
-    "foo": "bar"
+    "name": "drugs"
   },
   "headers": {
     "x-header-1": "header value"
