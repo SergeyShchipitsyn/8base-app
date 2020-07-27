@@ -1,7 +1,9 @@
 import React from 'react';
-import { useTable, Column, Cell } from 'react-table';
+import { useTable, Column, Cell, usePagination } from 'react-table';
 
 import styles from './Table.module.css';
+import { Pagination } from './pagination';
+import { INITIAL_PAGE_SIZE } from './pagination/Pagination';
 
 
 type TableProps<K extends keyof T = any, T = any> = {
@@ -12,17 +14,39 @@ type TableProps<K extends keyof T = any, T = any> = {
 };
 
 // Simple table from react-table, nothing to see here...
-const Table: React.FC<TableProps> = ({ columns, data, onCellClick = () => {} }) => {
+const Table: React.FC<TableProps> = (
+  {
+    columns,
+    data,
+    onCellClick = () => {}
+  }
+) => {
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
-  } = useTable({
-    columns,
-    data,
-  })
+    prepareRow,
+    canPreviousPage,
+    canNextPage,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: {
+      pageIndex, pageSize
+    }
+  } = useTable(
+    {
+     columns,
+     data,
+     initialState: { pageSize: INITIAL_PAGE_SIZE }
+    },
+    usePagination
+  )
+  const totalCount = data.length
+  const shownOnCurrentPage = rows.length
 
   function handleIdCellClick(cell: Cell): void {
     if (cell.column.id === 'id') {
@@ -63,6 +87,20 @@ const Table: React.FC<TableProps> = ({ columns, data, onCellClick = () => {} }) 
           )
         })}
       </tbody>
+
+      <Pagination
+        pageIndex={pageIndex}
+        pageSize={pageSize}
+        pageCount={pageCount}
+        totalCount={totalCount}
+        shownOnCurrentPage={shownOnCurrentPage}
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        goToPage={gotoPage}
+        previousPage={previousPage}
+        nextPage={nextPage}
+        setPageSize={setPageSize}
+      />
     </table>
   )
 };
