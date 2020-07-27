@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { ProductsList } from './productsList';
 import { ProductCreateDialog } from './productCreateDialog';
 import { ProductDeleteDialog } from './productDeleteDialog';
 import { Button } from '../../components/button';
 
+import { useDocumentTitle } from '../../hooks/useTitle';
 import { PRODUCT_CREATE_DIALOG_ID } from './productCreateDialog/mocks';
 import { PRODUCT_DELETE_DIALOG_ID } from './productDeleteDialog/productDeleteDialog';
 
@@ -18,9 +19,7 @@ const Products: React.FC = () => {
     [PRODUCT_DELETE_DIALOG_ID]: false
   });
 
-  useEffect(() => {
-    document.title = 'Products'
-  }, []);
+  useDocumentTitle('Products')
 
   const openDialog = useCallback((dialogId: string): void => {
     setDialogState({

@@ -43,7 +43,7 @@ const ProductDeleteDialog: React.FC<ProductDeleteDialogProps> = ({ onClose, isOp
       <div>
         <div>{`Are you sure you want to delete the product ${pathOr('', ['name'], product)}, ${pathOr('', ['id'], product)}?`}</div>
         <div>
-          <Button onClick={() => onClose(PRODUCT_DELETE_DIALOG_ID)}>Cancel</Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleDeleteProduct}>Delete</Button>
         </div>
       </div>

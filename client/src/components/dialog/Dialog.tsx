@@ -49,7 +49,7 @@ const Dialog: React.FC<DialogProps> = (
     <div ref={contentRef} className={styles.content}>
       <header className={styles.header}>
         <div className={styles.title}>{title}</div>
-        <Button className={styles.closeButton} onClick={() => onClose()}>&times;</Button>
+        <Button className={styles.closeButton} onClick={onClose}>&times;</Button>
       </header>
       {children}
     </div>,
