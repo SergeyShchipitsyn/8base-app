@@ -29,6 +29,19 @@ export const PRODUCT_CREATE_MUTATION = gql`
   }
 `;
 
+export const PRODUCT_UPDATE_BY_FILTER_MUTATION = gql`
+  mutation ProductUpdateByFilter($filter: ProductUpdateFilter, $data: ProductUpdateInput!) {
+    productUpdateByFilter(filter: $filter, data: $data) {
+      id
+      name
+      description
+      price
+      availableAmount
+      bestBefore
+    }
+  }
+`;
+
 export const PRODUCT_DELETE_MUTATION = gql`
   mutation ProductDelete($id: ID!) {
     productDelete(data: { id: $id }) {

@@ -4,10 +4,11 @@ functions:
     handler:
       code: src/resolvers/resolver/handler.ts
     schema: src/resolvers/resolver/schema.graphql
-  task:
-    type: task
+  fillMissingProducts:
     handler:
-      code: src/tasks/task/handler.ts
+      code: src/tasks/fillMissingProducts/handler.ts
+    type: task
+    schedule: "rate(1 days)"
   webhook:
     type: webhook
     handler:

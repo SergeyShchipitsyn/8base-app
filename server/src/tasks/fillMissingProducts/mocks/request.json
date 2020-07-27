@@ -1,6 +1,6 @@
 {
   "data": {
-    "availableAmount": "1000"
+    "availableAmount": "100"
   },
   "headers": {
     "x-header-1": "header value"
