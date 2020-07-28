@@ -1,0 +1,10 @@
+.dropdown {
+  display: none;
+}
+
+.dropdown_isOpen {
+  display: block;
+  z-index: 20;
+  background: white;
+  border-radius: 5px;
+}

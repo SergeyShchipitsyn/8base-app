@@ -7,7 +7,7 @@ import { Button } from '../../components/button';
 
 import { useDocumentTitle } from '../../hooks/useTitle';
 import { PRODUCT_CREATE_DIALOG_ID } from './productCreateDialog/mocks';
-import { PRODUCT_DELETE_DIALOG_ID } from './productDeleteDialog/productDeleteDialog';
+import { PRODUCT_DELETE_DIALOG_ID } from './productDeleteDialog/ProductDeleteDialog';
 
 import { Product } from './types';
 

@@ -8,7 +8,7 @@ functions:
     handler:
       code: src/tasks/fillMissingProducts/handler.ts
     type: task
-    schedule: "rate(1 days)"
+    schedule: "rate(1 day)"
   getRandomDiscount:
     type: webhook
     handler:

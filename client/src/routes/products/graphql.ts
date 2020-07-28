@@ -29,9 +29,9 @@ export const PRODUCT_CREATE_MUTATION = gql`
   }
 `;
 
-export const PRODUCT_UPDATE_BY_FILTER_MUTATION = gql`
-  mutation ProductUpdateByFilter($filter: ProductUpdateFilter, $data: ProductUpdateInput!) {
-    productUpdateByFilter(filter: $filter, data: $data) {
+export const PRODUCT_UPDATE_MUTATION = gql`
+  mutation ProductUpdate($data: ProductUpdateInput!) {
+    productUpdate(data: $data) {
       id
       name
       description

@@ -1,1 +1,1 @@
-export { ProductDeleteDialog } from './productDeleteDialog';
+export { ProductDeleteDialog } from './ProductDeleteDialog';

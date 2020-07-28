@@ -12,7 +12,7 @@ import { AppRoutes } from './constants/appRoutes';
 
 const { REACT_APP_8BASE_API_ENDPOINT } = process.env;
 
-const AUTH0_CLIENT_ID = 'nviTG1mAGCWUKMbu2ek0XCwh2i1ZZZZT';
+const AUTH0_CLIENT_ID = 'jec81cExAdebbr6GOAsPf8W7cEpuCjV4';
 const AUTH0_CLIENT_DOMAIN = 'secure.8base.com';
 
 
@@ -29,7 +29,7 @@ const authClient = Auth.createClient({
 function App() {
   return (
     <AppProvider
-      uri={REACT_APP_8BASE_API_ENDPOINT || 'https://api.8base.com/ckd4gszxh000207md85nl6woq'}
+      uri={REACT_APP_8BASE_API_ENDPOINT || 'https://api.8base.com/ckd5q90z6009508mh7omrg7xy'}
       authClient={authClient}
       onRequestSuccess={() => {}}
       onRequestError={() => {}}
