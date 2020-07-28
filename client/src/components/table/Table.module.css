@@ -4,8 +4,3 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
-.td:first-child {
-  cursor: pointer;
-  color: blue;
-}

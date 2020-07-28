@@ -1,16 +1,16 @@
-import React, { useRef } from 'react'
-import classNames from 'classnames'
+import React, { useRef } from 'react';
+import classNames from 'classnames';
 
 import { useClickOutside } from '../../hooks/useClickOutside';
 
-import styles from './Dropdown.module.css'
+import styles from './Dropdown.module.css';
 
 
 type DropdownProps = {
   onClose?: () => void
   isOpen?: boolean
   className?: string
-}
+};
 
 const Dropdown: React.FC<DropdownProps> = (
   {

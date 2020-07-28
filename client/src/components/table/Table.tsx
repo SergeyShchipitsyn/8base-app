@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import { useTable, Column, Cell, usePagination, useBlockLayout } from 'react-table';
+import { useTable, Column, usePagination, useBlockLayout } from 'react-table';
 
 import styles from './Table.module.css';
 import { Pagination } from './pagination';
 import { INITIAL_PAGE_SIZE } from './pagination/Pagination';
 
 
-type TableProps<K extends keyof T = any, T = any> = {
+type TableProps<T = any> = {
   columns: Column[],
   data: T[]
   loading?: boolean
   fetchData: ({ pageIndex, pageSize }: FetchData) => void
-  onCellClick?: (cellValue: K) => void
+  onEditDialogOpen?: (rowId: string) => void
+  onDeleteDialogOpen?: (rowId: string) => void
 };
 
 export type FetchData = {
@@ -25,7 +26,8 @@ const Table: React.FC<TableProps> = (
     columns,
     data,
     fetchData,
-    onCellClick = () => {}
+    onEditDialogOpen = () => {},
+    onDeleteDialogOpen = () => {}
   }
 ) => {
   const {
@@ -46,9 +48,12 @@ const Table: React.FC<TableProps> = (
     }
   } = useTable(
     {
-     columns,
-     data,
-     initialState: { pageSize: INITIAL_PAGE_SIZE }
+      columns,
+      data,
+      initialState: { pageSize: INITIAL_PAGE_SIZE },
+      getRowId: (row: any) => row.id,
+      onEditDialogOpen,
+      onDeleteDialogOpen
     },
     useBlockLayout,
     usePagination
@@ -59,12 +64,6 @@ const Table: React.FC<TableProps> = (
   useEffect(() => {
     fetchData({ pageIndex, pageSize })
   }, [pageIndex, pageSize, fetchData])
-
-  function handleIdCellClick(cell: Cell): void {
-    if (cell.column.id === 'id') {
-      onCellClick(cell.value)
-    }
-  }
 
   return (
     <div {...getTableProps()}>
@@ -88,7 +87,6 @@ const Table: React.FC<TableProps> = (
                 return (
                   <div
                     {...cell.getCellProps()}
-                    onClick={() => handleIdCellClick(cell)}
                     className={styles.td}
                   >
                     {cell.render('Cell')}

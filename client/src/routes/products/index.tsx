@@ -39,14 +39,22 @@ const Products: React.FC = () => {
     }
   }, [selectedProduct, dialogState]);
 
-  const handleProductSelect = useCallback((product: Product) => {
+  const handleOpenDeleteDialog = useCallback((product: Product) => {
     setSelectedProduct(product)
     openDialog(PRODUCT_DELETE_DIALOG_ID)
   }, [openDialog])
 
+  const handleOpenEditDialog = useCallback((product: Product) => {
+    setSelectedProduct(product)
+    openDialog(PRODUCT_CREATE_DIALOG_ID)
+  }, [openDialog])
+
   return (
     <div>
-        <ProductsList onProductSelect={handleProductSelect} />
+        <ProductsList
+          onDeleteDialogOpen={handleOpenDeleteDialog}
+          onEditDialogOpen={handleOpenEditDialog}
+        />
 
         <Button onClick={() => openDialog(PRODUCT_CREATE_DIALOG_ID)}>
           Create new product

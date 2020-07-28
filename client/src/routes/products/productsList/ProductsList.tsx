@@ -13,10 +13,14 @@ import { FetchData } from '../../../components/table/Table';
 
 
 type ProductListProps = {
-  onProductSelect: (product: Product) => void
+  onEditDialogOpen: (product: Product) => void
+  onDeleteDialogOpen: (product: Product) => void
 }
 
-const ProductsList: React.FC<ProductListProps> = ({ onProductSelect }) => {
+const ProductsList: React.FC<ProductListProps> = ({
+  onEditDialogOpen,
+  onDeleteDialogOpen,
+}) => {
   const [requestVariables, setRequestVariables] = useState<FetchData | null>(null);
   const { loading, data } = useQuery<ProductListQueryResponse>(PRODUCTS_LIST_QUERY, {
     variables: {
@@ -26,16 +30,23 @@ const ProductsList: React.FC<ProductListProps> = ({ onProductSelect }) => {
   });
   const products = productsListSelector(pathOr([], ['productsList', 'items'], data));
 
-  const handleProductSelect = useCallback((productId: string): void  => {
-    const selectedProduct = pathOr<Product[]>([], ['productsList', 'items'], data)
-      .find(product => product.id === productId) as Product
-
-    onProductSelect(selectedProduct)
-  }, [data, onProductSelect]);
-
   const fetchData = useCallback((params: FetchData) => {
     setRequestVariables(params)
   }, []);
+
+  const handleOpenEditDialog = useCallback((productId: string) => {
+    const selectedProduct = pathOr<Product[]>([], ['productsList', 'items'], data)
+      .find(product => product.id === productId) as Product
+
+    onEditDialogOpen(selectedProduct)
+  }, [data, onEditDialogOpen])
+
+  const handleOpenDeleteDialog = useCallback((productId: string) => {
+    const selectedProduct = pathOr<Product[]>([], ['productsList', 'items'], data)
+      .find(product => product.id === productId) as Product
+
+    onDeleteDialogOpen(selectedProduct)
+  }, [data, onDeleteDialogOpen])
 
   return (
     <div>
@@ -45,7 +56,8 @@ const ProductsList: React.FC<ProductListProps> = ({ onProductSelect }) => {
         data={products}
         fetchData={fetchData}
         loading={loading}
-        onCellClick={handleProductSelect}
+        onEditDialogOpen={handleOpenEditDialog}
+        onDeleteDialogOpen={handleOpenDeleteDialog}
       />
     </div>
   );
