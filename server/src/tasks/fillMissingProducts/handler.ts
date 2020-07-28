@@ -1,5 +1,18 @@
-import { PRODUCT_UPDATE_BY_FILTER_MUTATION } from './../../../../client/src/routes/products/graphql';
+const gql = require('graphql-tag');
 
+
+const PRODUCT_UPDATE_BY_FILTER_MUTATION = gql`
+  mutation ProductUpdateByFilter($filter: ProductUpdateFilter, $data: ProductUpdateInput!) {
+    productUpdateByFilter(filter: $filter, data: $data) {
+      id
+      name
+      description
+      price
+      availableAmount
+      bestBefore
+    }
+  }
+`;
 
 export default async (event: any, ctx: any): Promise<void> => {
   try {
@@ -8,6 +21,6 @@ export default async (event: any, ctx: any): Promise<void> => {
       data: { availableAmount: { add: 10 } }
     })
   } catch (error) {
-    console.error('Failed to fill low amount products')
+    console.log('Failed to fill low amount products')
   }
 };

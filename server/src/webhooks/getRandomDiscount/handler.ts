@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 const RANDOM_NUMBER_URL = "https://www.random.org/integers/"
 
 type WebhookResult = {

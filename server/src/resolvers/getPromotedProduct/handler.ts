@@ -1,4 +1,4 @@
-import { PRODUCTS_LIST_QUERY } from '../../../../client/src/routes/products/graphql';
+const gql = require('graphql-tag');
 
 
 type ResolverResult = {
@@ -7,13 +7,28 @@ type ResolverResult = {
   }
 };
 
+const PRODUCTS_LIST_QUERY = gql`
+  query ProductsList($first: Int, $skip: Int) {
+    productsList(first: $first, skip: $skip) {
+      items {
+        id
+        name
+        description
+        price
+        availableAmount
+        bestBefore
+      }
+    }
+  }
+`;
+
 export default async (event: any, ctx: any) : Promise<ResolverResult> => {
   const productsList = await ctx.api.gqlRequest(PRODUCTS_LIST_QUERY, {
     skip: 0,
     first: 1
   })
 
-  const firstProduct = productsList?.items?.[0]
+  const firstProduct = productsList && productsList.items && productsList.items[0]
 
   if (firstProduct) {
     return {
