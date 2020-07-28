@@ -1,6 +1,6 @@
 {
   "data": {
-    "foo": "bar"
+    "shopId": 12345
   },
   "headers": {
     "x-header-1": "header value"

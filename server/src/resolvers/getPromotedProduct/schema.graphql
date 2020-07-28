@@ -5,11 +5,11 @@
 #
 # https://docs.8base.com/8base-console/custom-functions/resolvers
 #
- 
+
 type ResolverResult {
   result: String!
 }
 
 extend type Query {
-  resolver(foo: String!): ResolverResult
+  getPromotedProduct(foo: String!): ResolverResult
 }

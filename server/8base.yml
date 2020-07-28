@@ -1,9 +1,9 @@
 functions:
-  resolver:
+  getPromotedProduct:
     type: resolver
     handler:
-      code: src/resolvers/resolver/handler.ts
-    schema: src/resolvers/resolver/schema.graphql
+      code: src/resolvers/getPromotedProduct/handler.ts
+    schema: src/resolvers/getPromotedProduct/schema.graphql
   fillMissingProducts:
     handler:
       code: src/tasks/fillMissingProducts/handler.ts
