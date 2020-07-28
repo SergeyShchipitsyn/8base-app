@@ -1,0 +1,10 @@
+{
+  "data": {
+    "minPercent": 10,
+    "maxPercent": 50
+  },
+  "headers": {
+    "x-header-1": "header value"
+  },
+  "body": "{\"minPercent\":\"10\", \"maxPercent\":\"50\"}"
+}

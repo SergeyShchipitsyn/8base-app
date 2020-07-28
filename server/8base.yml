@@ -9,11 +9,11 @@ functions:
       code: src/tasks/fillMissingProducts/handler.ts
     type: task
     schedule: "rate(1 days)"
-  webhook:
+  getRandomDiscount:
     type: webhook
     handler:
-      code: src/webhooks/webhook/handler.ts
-    path: /webhook
+      code: src/webhooks/getRandomDiscount/handler.ts
+    path: '{shopId}/getRandomDiscount'
     method: POST
   banIllegalProduct:
     type: trigger.after
