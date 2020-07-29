@@ -2,5 +2,10 @@
 .td {
   padding: 10px;
   text-overflow: ellipsis;
-  overflow: hidden;
+  /* overflow: hidden; */
+  width: 250px;
+}
+
+div[role="row"] {
+    display: flex;
 }

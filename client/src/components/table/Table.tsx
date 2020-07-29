@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTable, Column, usePagination, useBlockLayout } from 'react-table';
+import { useTable, Column, usePagination } from 'react-table';
 
 import styles from './Table.module.css';
 import { Pagination } from './pagination';
@@ -55,7 +55,6 @@ const Table: React.FC<TableProps> = (
       onEditDialogOpen,
       onDeleteDialogOpen
     },
-    useBlockLayout,
     usePagination
   )
   const totalCount = data.length
@@ -66,7 +65,7 @@ const Table: React.FC<TableProps> = (
   }, [pageIndex, pageSize, fetchData])
 
   return (
-    <div {...getTableProps()}>
+    <div {...getTableProps()} className="w-100 h-100">
 
       <div>
         {headerGroups.map(headerGroup => (

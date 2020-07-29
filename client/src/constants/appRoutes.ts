@@ -1,5 +1,7 @@
 export enum AppRoutes {
   Auth = '/auth',
   AuthCallback = '/auth/callback',
-  Products = '/products'
+  Products = '/products',
+  Orders = '/orders',
+  Clients = '/clients'
 };

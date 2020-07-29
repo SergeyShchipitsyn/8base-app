@@ -11,6 +11,8 @@ import { productsListSelector } from './helpers';
 import { ProductListQueryResponse, Product } from '../types';
 import { FetchData } from '../../../components/table/Table';
 
+import styles from './ProductsList.module.css';
+
 
 type ProductListProps = {
   onEditDialogOpen: (product: Product) => void
@@ -49,8 +51,8 @@ const ProductsList: React.FC<ProductListProps> = ({
   }, [data, onDeleteDialogOpen])
 
   return (
-    <div>
-      <header>Products</header>
+    <div className={styles.wrapper}>
+      <h3 className="m-0">Products</h3>
       <Table
         columns={productColumns}
         data={products}

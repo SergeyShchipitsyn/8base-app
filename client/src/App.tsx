@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/protectedRoute';
 import { Auth as AuthCallback } from './routes/auth';
 import { Container } from './components/container';
 import { Products } from './routes/products';
+import { Clients } from './routes/clients';
 
 import { AppRoutes } from './constants/appRoutes';
 
@@ -36,11 +37,7 @@ function App() {
     >
       {({ loading }) => {
         if (loading) {
-          return (
-            <Container>
-              <p>Please wait...</p>
-            </Container>
-          )
+          return null
         }
 
         return (
@@ -53,6 +50,11 @@ function App() {
                     exact
                     path={AppRoutes.Products}
                     component={Products}
+                  />
+                  <ProtectedRoute
+                    exact
+                    path={AppRoutes.Clients}
+                    component={Clients}
                   />
                   <Redirect to={AppRoutes.Products} />
                 </Container>

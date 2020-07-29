@@ -50,7 +50,8 @@ const Products: React.FC = () => {
   }, [openDialog])
 
   return (
-    <div>
+    <div className="w-100">
+        <h4 className="m-0 pb-16">Products</h4>
         <ProductsList
           onDeleteDialogOpen={handleOpenDeleteDialog}
           onEditDialogOpen={handleOpenEditDialog}
