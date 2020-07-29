@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.position-relative {
+  position: relative;
+}
+
 .d-flex {
   display: flex;
 }

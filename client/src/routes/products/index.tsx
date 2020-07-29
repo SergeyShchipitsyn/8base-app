@@ -63,6 +63,7 @@ const Products: React.FC = () => {
         <ProductCreateDialog
           isOpen={dialogState[PRODUCT_CREATE_DIALOG_ID]}
           onClose={onClose}
+          product={selectedProduct}
         />
         <ProductDeleteDialog
           isOpen={dialogState[PRODUCT_DELETE_DIALOG_ID]}

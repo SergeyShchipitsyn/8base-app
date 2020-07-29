@@ -13,8 +13,8 @@ export type ProductListQueryResponse = {
   }
 };
 
-export type ProductCreateMutationResponse = Product;
 export type ProductCreateMutationVariables = { data: Omit<Product, 'id'> };
+export type ProductUpdateMutationVariables = { data: Product };
 
 export type ProductDeleteMutationResponse = { success: boolean };
 export type ProductDeleteMutationVariables = { data: { id: string } };

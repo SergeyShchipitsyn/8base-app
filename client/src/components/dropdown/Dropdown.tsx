@@ -25,14 +25,16 @@ const Dropdown: React.FC<DropdownProps> = (
   useClickOutside(ref, onClose)
 
   return (
-    <div
-      ref={ref}
-      className={classNames(styles.dropdown, {
-        [styles.dropdown_isOpen]: isOpen,
-        [className]: className
-      })}
-    >
-      {children}
+    <div className="position-relative">
+      <div
+        ref={ref}
+        className={classNames(styles.dropdown, {
+          [styles.dropdown_isOpen]: isOpen,
+          [className]: className
+        })}
+      >
+        {children}
+      </div>
     </div>
   );
 };
