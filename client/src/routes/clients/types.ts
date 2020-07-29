@@ -1,3 +1,6 @@
+import { Order } from '../orders/types';
+
+
 export type Client = {
   id: string
   email: string
@@ -14,8 +17,6 @@ export type ClientsListQueryResponse = {
     items: Client[]
   }
 };
-
-export type Order = any
 
 export type ClientCreateMutationVariables = { data: Omit<Client, 'id'> };
 export type ClientUpdateMutationVariables = { data: Client };

@@ -8,6 +8,7 @@ import { Auth as AuthCallback } from './routes/auth';
 import { Container } from './components/container';
 import { Products } from './routes/products';
 import { Clients } from './routes/clients';
+import { Orders } from './routes/orders';
 
 import { AppRoutes } from './constants/appRoutes';
 
@@ -55,6 +56,11 @@ function App() {
                     exact
                     path={AppRoutes.Clients}
                     component={Clients}
+                  />
+                  <ProtectedRoute
+                    exact
+                    path={AppRoutes.Orders}
+                    component={Orders}
                   />
                   <Redirect to={AppRoutes.Products} />
                 </Container>
