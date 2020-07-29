@@ -22,6 +22,10 @@ export const clientColumns = [
     accessor: 'balance'
   },
   {
+    Header: 'Orders',
+    accessor: 'orders'
+  },
+  {
     Header: '',
     Cell: ({ row, onEditDialogOpen, onDeleteDialogOpen }: CellProps<any>) => (
       <ActionsCell

@@ -4,7 +4,9 @@ export type Client = {
   firstName: string
   lastName: string
   balance: number
-  orders: Order[]
+  orders: {
+    items: Order[]
+  }
 }
 
 export type ClientsListQueryResponse = {

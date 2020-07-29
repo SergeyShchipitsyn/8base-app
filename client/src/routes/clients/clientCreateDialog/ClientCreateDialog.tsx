@@ -27,7 +27,7 @@ const ClientCreateDialog: React.FC<ClientCreateDialogProps> = ({ onClose, isOpen
   const [createClient] = useMutation<Client, ClientCreateMutationVariables>(
     CLIENT_CREATE_MUTATION,
     {
-      variables: { data: { ...state, orders: [] } },
+      variables: { data: { ...state, orders: { items: [] } } },
       refetchQueries: ['ClientsList']
     }
   );
@@ -36,7 +36,7 @@ const ClientCreateDialog: React.FC<ClientCreateDialogProps> = ({ onClose, isOpen
     {
       variables: { data: {
         id: client?.id ?? "",
-        orders: [],
+        orders: { items: [] },
         ...state
       } },
       refetchQueries: ['ClientsList']
