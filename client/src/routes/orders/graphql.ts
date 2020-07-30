@@ -13,11 +13,9 @@ export const ORDERS_LIST_QUERY = gql`
             name
           }
         }
-        clients {
-          items {
-            id
-            email
-          }
+        client {
+          id
+          email
         }
       }
     }
@@ -35,11 +33,9 @@ export const ORDER_CREATE_MUTATION = gql`
           name
         }
       }
-      clients {
-        items {
-          id
-          email
-        }
+      client {
+        id
+        email
       }
     }
   }
@@ -56,11 +52,9 @@ export const ORDER_UPDATE_MUTATION = gql`
           name
         }
       }
-      clients {
-        items {
-          id
-          email
-        }
+      client {
+        id
+        email
       }
     }
   }

@@ -5,18 +5,16 @@ import { Client } from '../clients/types';
 export type Order = {
   id: string
   status: OrderStatus
-  clients: {
-    items: Client[]
-  }
+  client?: Client
   products: {
     items: Product[]
   }
 }
 
 export enum OrderStatus {
-  PENDING = 'pending',
-  IN_PROGRESS = 'inProgress',
-  DONE = 'done'
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE'
 }
 
 export type OrdersListQueryResponse = {

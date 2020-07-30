@@ -30,9 +30,7 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
       variables: {
         data: {
           ...state,
-          clients: {
-            items: []
-          },
+          client: order?.client,
           products: {
             items: []
           }
@@ -47,9 +45,7 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
       variables: {
         data: {
           id: order?.id ?? "",
-          clients: {
-            items: []
-          },
+          client: order?.client,
           products: {
             items: []
           },
