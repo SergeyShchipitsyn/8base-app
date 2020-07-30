@@ -7,7 +7,7 @@ import { Input } from '../../../components/input';
 
 import { CLIENT_CREATE_MUTATION, CLIENT_UPDATE_MUTATION } from '../graphql';
 import { clientCreateFields, CLIENT_CREATE_DIALOG_ID } from './mocks';
-import { formReducer, getInitialState } from './helpers';
+import { formReducer, getInitialState, getVariablesFromState } from './helpers';
 
 import { ClientCreateMutationVariables, Client, ClientUpdateMutationVariables } from '../types';
 
@@ -27,7 +27,7 @@ const ClientCreateDialog: React.FC<ClientCreateDialogProps> = ({ onClose, isOpen
   const [createClient] = useMutation<Client, ClientCreateMutationVariables>(
     CLIENT_CREATE_MUTATION,
     {
-      variables: { data: { ...state, orders: { items: [] } } },
+      variables: { data: getVariablesFromState(state) },
       refetchQueries: ['ClientsList']
     }
   );
@@ -36,8 +36,7 @@ const ClientCreateDialog: React.FC<ClientCreateDialogProps> = ({ onClose, isOpen
     {
       variables: { data: {
         id: client?.id ?? "",
-        orders: { items: [] },
-        ...state
+        ...getVariablesFromState(state)
       } },
       refetchQueries: ['ClientsList']
     }

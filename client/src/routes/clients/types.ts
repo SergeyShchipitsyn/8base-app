@@ -7,7 +7,7 @@ export type Client = {
   firstName: string
   lastName: string
   balance: number
-  orders: {
+  orders?: {
     items: Order[]
   }
 }

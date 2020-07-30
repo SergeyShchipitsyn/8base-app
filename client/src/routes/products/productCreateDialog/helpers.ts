@@ -2,6 +2,7 @@ import { FormState, ReducerAction } from './types';
 import { Product } from '../types';
 
 import { initialFieldsState } from './mocks';
+import { isValidDate } from '../../../helpers/isValid';
 
 
 export function formReducer(state: FormState, action: ReducerAction): FormState {
@@ -27,6 +28,10 @@ export function getVariablesFromState(state: FormState) {
     ...state,
     price: Number(state.price),
     availableAmount: Number(state.availableAmount),
-    bestBefore: new Date(state.bestBefore).toISOString()
+    bestBefore: getDate(state.bestBefore)
   }
 };
+
+function getDate(value: string): string {
+  return isValidDate(value) ? new Date(value).toISOString().substring(0, 10) : String(Date.now())
+}

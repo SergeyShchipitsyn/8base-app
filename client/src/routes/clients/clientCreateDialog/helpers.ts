@@ -11,6 +11,13 @@ export function formReducer(state: FormState, action: ReducerAction): FormState 
   }
 };
 
+export function getVariablesFromState(state: FormState) {
+  return {
+    ...state,
+    balance: Number(state.balance),
+  }
+};
+
 export function getInitialState(client?: Client): FormState {
   if (!client) {
     return initialFieldsState
