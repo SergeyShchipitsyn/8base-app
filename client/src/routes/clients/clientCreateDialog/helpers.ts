@@ -12,8 +12,11 @@ export function formReducer(state: FormState, action: ReducerAction): FormState 
 };
 
 export function getVariablesFromState(state: FormState) {
+  const { email, firstName, lastName } = state;
   return {
-    ...state,
+    email,
+    firstName,
+    lastName,
     balance: Number(state.balance),
   }
 };
