@@ -24,11 +24,12 @@ export function getInitialState(product?: Product): FormState {
 }
 
 export function getVariablesFromState(state: FormState) {
+  const { name, price, availableAmount, bestBefore } = state;
   return {
-    ...state,
-    price: Number(state.price),
-    availableAmount: Number(state.availableAmount),
-    bestBefore: getDate(state.bestBefore)
+    name,
+    price: Number(price),
+    availableAmount: Number(availableAmount),
+    bestBefore: getDate(bestBefore)
   }
 };
 
