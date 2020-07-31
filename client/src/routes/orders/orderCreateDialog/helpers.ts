@@ -1,4 +1,5 @@
-import { FormState, ReducerAction } from './types';
+import { ReducerAction } from '../../../shared/types/forms';
+import { FormState } from './types';
 import { Order } from '../types';
 
 import { initialFieldsState } from './mocks';

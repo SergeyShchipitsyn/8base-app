@@ -1,5 +1,5 @@
+import { Field } from '../../../shared/types/forms';
 import { OrderStatus } from './../types';
-import { Field } from './types';
 
 
 export const ORDER_CREATE_DIALOG_ID = 'ORDER_CREATE_DIALOG_ID';

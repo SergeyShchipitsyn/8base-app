@@ -1,4 +1,4 @@
-import { Field } from './types';
+import { Field } from '../../../shared/types/forms';
 
 
 export const CLIENT_CREATE_DIALOG_ID = 'CLIENT_CREATE_DIALOG_ID';

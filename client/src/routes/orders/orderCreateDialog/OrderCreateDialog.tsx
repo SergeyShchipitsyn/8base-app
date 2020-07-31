@@ -1,5 +1,5 @@
 import React, { Fragment, useReducer, useCallback, useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { Dialog } from '../../../components/dialog';
 import { Button } from '../../../components/button';
@@ -8,8 +8,12 @@ import { Input } from '../../../components/input';
 import { ORDER_CREATE_MUTATION, ORDER_UPDATE_MUTATION } from '../graphql';
 import { orderCreateFields, ORDER_CREATE_DIALOG_ID } from './mocks';
 import { formReducer, getInitialState } from './helpers';
+import { CLIENTS_LIST_QUERY } from '../../clients/graphql';
+import { PRODUCTS_LIST_QUERY } from '../../products/graphql';
 
 import { OrderCreateMutationVariables, Order, OrderUpdateMutationVariables } from '../types';
+import { ClientsListQueryResponse } from '../../clients/types';
+import { ProductListQueryResponse } from '../../products/types';
 
 import styles from './OrderCreateDialog.module.css';
 
@@ -36,7 +40,7 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
           }
         }
       },
-      refetchQueries: ['OrdersList']
+      refetchQueries: ['OrdersList, ProductsList, ClientsList']
     }
   );
   const [updateOrder] = useMutation<Order, OrderUpdateMutationVariables>(
@@ -52,9 +56,16 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
           ...state
         }
       },
-      refetchQueries: ['OrdersList']
+      refetchQueries: ['OrdersList, ProductsList, ClientsList']
     }
   );
+  const { data: clients } = useQuery<ClientsListQueryResponse>(CLIENTS_LIST_QUERY, {
+    variables: { first: 1000, skip: 0 }
+  });
+  const { data: products } = useQuery<ProductListQueryResponse>(PRODUCTS_LIST_QUERY, {
+    variables: { first: 1000, skip: 0 }
+  });
+
 
   useEffect(() => {
     if (order) {

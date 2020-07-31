@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import { ClientsList } from './ordersList';
+import { OrdersList } from './ordersList';
 import { OrderCreateDialog } from './orderCreateDialog';
 import { OrderDeleteDialog } from './orderDeleteDialog';
 import { Button } from '../../components/button';
@@ -52,7 +52,7 @@ const Orders: React.FC = () => {
   return (
     <div className="w-100">
         <h4 className="m-0 pb-16">Orders</h4>
-        <ClientsList
+        <OrdersList
           onDeleteDialogOpen={handleOpenDeleteDialog}
           onEditDialogOpen={handleOpenEditDialog}
         />

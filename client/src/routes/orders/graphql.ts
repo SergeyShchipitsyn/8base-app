@@ -11,11 +11,16 @@ export const ORDERS_LIST_QUERY = gql`
           items {
             id
             name
+            type
+            price
+            availableAmount
           }
         }
         client {
           id
           email
+          firstName
+          lastName
         }
       }
     }

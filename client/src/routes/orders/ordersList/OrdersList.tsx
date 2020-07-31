@@ -19,7 +19,7 @@ type OrdersListProps = {
   onDeleteDialogOpen: (order: Order) => void
 }
 
-const ClientsList: React.FC<OrdersListProps> = ({
+const OrdersList: React.FC<OrdersListProps> = ({
   onEditDialogOpen,
   onDeleteDialogOpen,
 }) => {
@@ -65,4 +65,4 @@ const ClientsList: React.FC<OrdersListProps> = ({
   );
 };
 
-export { ClientsList };
+export { OrdersList };
