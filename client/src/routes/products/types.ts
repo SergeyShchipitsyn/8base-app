@@ -13,6 +13,15 @@ export type ProductListQueryResponse = {
   }
 };
 
+export enum ProductTypes {
+  FRUITS = 'FRUITS',
+  VEGETABLES = 'VEGETABLES',
+  MEAT = 'MEAT',
+  FISH = 'FISH',
+  MILK_PRODUCTS = 'MILK_PRODUCTS',
+  OTHER = 'OTHER'
+}
+
 export type ProductCreateMutationVariables = { data: Omit<Product, 'id'> };
 export type ProductUpdateMutationVariables = { data: Product };
 
