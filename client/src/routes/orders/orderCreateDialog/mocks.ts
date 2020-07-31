@@ -1,4 +1,4 @@
-import { Field } from '../../../shared/types/forms';
+import { Field, FieldType } from '../../../shared/types/forms';
 import { OrderStatus } from './../types';
 
 
@@ -8,9 +8,22 @@ export const orderCreateFields: Field[] = [
   {
     label: 'Status',
     name: 'status',
+    type: FieldType.SELECT
+  },
+  {
+    label: 'Client',
+    name: 'client',
+    type: FieldType.SELECT
+  },
+  {
+    label: 'Product',
+    name: 'products',
+    type: FieldType.SELECT
   }
 ];
 
 export const initialFieldsState = {
+  client: '',
+  products: '',
   status: OrderStatus.PENDING
 };

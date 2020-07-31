@@ -23,8 +23,11 @@ export type OrdersListQueryResponse = {
   }
 };
 
-export type OrderCreateMutationVariables = { data: Omit<Order, 'id'> };
-export type OrderUpdateMutationVariables = { data: Order };
+
+// export type OrderCreateMutationVariables = { data: Omit<Order, 'id'> };
+// export type OrderUpdateMutationVariables = { data: Order };
+export type OrderCreateMutationVariables = { data: any };
+export type OrderUpdateMutationVariables = { data: any };
 
 export type OrderDeleteMutationResponse = { success: boolean };
 export type OrderDeleteMutationVariables = { data: { id: string } };

@@ -1,16 +1,26 @@
 import React, { Fragment, useReducer, useCallback, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { pathOr } from 'ramda';
 
 import { Dialog } from '../../../components/dialog';
 import { Button } from '../../../components/button';
 import { Input } from '../../../components/input';
+import { Select } from '../../../components/select';
 
 import { ORDER_CREATE_MUTATION, ORDER_UPDATE_MUTATION } from '../graphql';
 import { orderCreateFields, ORDER_CREATE_DIALOG_ID } from './mocks';
-import { formReducer, getInitialState } from './helpers';
+import {
+  formReducer,
+  getInitialState,
+  OrderStatusOptions,
+  getProductOptions,
+  getClientsOptions
+} from './helpers';
 import { CLIENTS_LIST_QUERY } from '../../clients/graphql';
 import { PRODUCTS_LIST_QUERY } from '../../products/graphql';
 
+import { Field, FieldType } from '../../../shared/types/forms';
+import { SelectOption } from '../../../components/select/Select';
 import { OrderCreateMutationVariables, Order, OrderUpdateMutationVariables } from '../types';
 import { ClientsListQueryResponse } from '../../clients/types';
 import { ProductListQueryResponse } from '../../products/types';
@@ -34,9 +44,11 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
       variables: {
         data: {
           ...state,
-          client: order?.client,
+          client: {
+            connect: { id: state.client }
+          },
           products: {
-            items: []
+            connect: { id: state.products }
           }
         }
       },
@@ -49,11 +61,12 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
       variables: {
         data: {
           id: order?.id ?? "",
-          client: order?.client,
-          products: {
-            items: []
+          client: {
+            connect: { id: state.client }
           },
-          ...state
+          products: {
+            connect: { id: state.products }
+          }
         }
       },
       refetchQueries: ['OrdersList, ProductsList, ClientsList']
@@ -65,25 +78,35 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
   const { data: products } = useQuery<ProductListQueryResponse>(PRODUCTS_LIST_QUERY, {
     variables: { first: 1000, skip: 0 }
   });
+  const options = {
+    status: OrderStatusOptions,
+    client: getClientsOptions(pathOr([], ['clientsList', 'items'], clients)),
+    products: getProductOptions(pathOr([], ['productsList', 'items'], products))
+  }
 
 
   useEffect(() => {
     if (order) {
-      const orderWithoutId = {
-        ...order,
-        id: undefined
+      const formState = {
+        status: order.status,
+        client: pathOr('', ['client', 'id'], order),
+        products: pathOr('', ['products', 'items', '0', 'id'], order)
       }
-      Object.entries(orderWithoutId).forEach(([key, value]: any) => dispatch({ name: key, payload: value }))
+      Object.entries(formState)
+        .forEach(([key, value]: any) => dispatch({ name: key, payload: value }))
     }
-  }, [order])
+  }, [order]);
 
   const handleClose = useCallback(() => {
     onClose(ORDER_CREATE_DIALOG_ID)
   }, [onClose]);
 
-  function handleInputChange(inputName: string, event: React.ChangeEvent<HTMLInputElement>): void {
+  function handleFieldChange(
+    fieldName: string,
+    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+  ): void {
     dispatch({
-      name: inputName,
+      name: fieldName,
       payload: event.currentTarget.value
     })
   };
@@ -93,11 +116,37 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
       createOrder();
       handleClose();
       return
-    }
+    };
 
     updateOrder();
     handleClose();
   };
+
+  function renderField(field: Field): React.ReactNode {
+    switch (field.type) {
+      case FieldType.INPUT:
+        return (
+          <Input
+            id={field.name}
+            name={field.name}
+            placeholder={field.label}
+            value={(state as Record<string, string | number>)[field.name]}
+            onChange={event => handleFieldChange(field.name, event)}
+          />
+        );
+      case FieldType.SELECT:
+        return (
+          <Select
+            name={field.name}
+            placeholder={field.label}
+            options={(options as Record<string, SelectOption[]>)[field.name]}
+            onChange={event => handleFieldChange(field.name, event)}
+          />
+        )
+      default:
+        return null;
+    }
+  }
 
   if (!isOpen) return null;
 
@@ -109,13 +158,7 @@ const OrderCreateDialog: React.FC<OrderCreateDialogProps> = ({ onClose, isOpen, 
             <label htmlFor={field.name}>
               {field.label} {field.optional && ' (optional)'}
             </label>
-            <Input
-              id={field.name}
-              name={field.name}
-              placeholder={field.label}
-              value={(state as Record<string, string | number>)[field.name]}
-              onChange={event => handleInputChange(field.name, event)}
-            />
+            {renderField(field)}
           </Fragment>
         ))}
         <div className={styles.footerButtons}>
